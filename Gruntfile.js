@@ -17,12 +17,17 @@ module.exports = function (grunt) {
 
     // Define the configuration for all the tasks
     grunt.initConfig({
-
+        
         // Project settings
         config: {
             // Configurable paths
             app: 'app',
             dist: 'dist'
+        },
+        
+        // EJS templates
+        ejs: {
+          '<% config.app %>/scripts/templates.js': '<% config.app %>/templates/{,*/}*.ejs'
         },
         
         // Watches files for changes and runs tasks based on the changed files
@@ -183,6 +188,15 @@ module.exports = function (grunt) {
             }
         },
 
+        // Compile client-side scripts into a single file (and allow use of require)
+        browserify: {
+          dist: {
+            files: {
+              '.tmp/module.js': ['public/scripts/**/*.js']
+            }
+          }
+        },
+        
         // Automatically inject Bower components into the HTML file
         bowerInstall: {
             app: {
@@ -365,6 +379,7 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'clean:server',
+            'browserify',
             'concurrent:server',
             'autoprefixer',
             'connect:livereload',

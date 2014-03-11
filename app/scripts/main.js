@@ -1,1 +1,2 @@
-console.log('\'Allo \'Allo!');
+// Grunt browserify task pulls in all game scripts
+
