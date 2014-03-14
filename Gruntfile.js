@@ -18,6 +18,42 @@ module.exports = function (grunt) {
       dist: 'dist'
     },
     
+    // Server settings (referenced elsewhere in this file)
+    connect: {
+      options: {
+        port: 9000,
+        livereload: 35729,
+        // Change this to '0.0.0.0' to access the server from outside
+        hostname: 'localhost'
+      },
+      livereload: {
+        options: {
+            open: true,
+            base: [
+                '.tmp',
+                '<%= config.webroot %>'
+            ]
+        }
+      },
+      test: {
+        options: {
+            port: 9001,
+            base: [
+                '.tmp',
+                'test',
+                '<%= config.webroot %>'
+            ]
+        }
+      },
+      dist: {
+        options: {
+            open: true,
+            base: '<%= config.dist %>',
+            livereload: false
+        }
+      }
+    },
+    
     pkg: grunt.file.readJSON('package.json'),
     develop: {
       server: {
@@ -300,16 +336,16 @@ module.exports = function (grunt) {
         files: ['<%= config.webroot %>/styles{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
       },
-//      livereload: {
-//        options: {
-//          livereload: '<%= connect.options.livereload %>'
-//        },
-//        files: [
-//          '<%= config.app %>/{,*/}*.html',
-//          '.tmp/styles/{,*/}*.css',
-//          '<%= config.app %>/images/{,*/}*'
-//        ]
-//      },
+      livereload: {
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        },
+        files: [
+          '<%= config.webroot %>/{,*/}*.html',
+          '.tmp/styles/{,*/}*.css',
+          '<%= config.webroot %>/images/{,*/}*'
+        ]
+      },
       jade: {
         files: ['app/views/**/*.jade'],
         options: { livereload: reloadPort }

@@ -1,4 +1,3 @@
-// TODO: Eventually, use grunt for build
 doctype 5
 html(lang='en')
   head
@@ -6,8 +5,20 @@ html(lang='en')
     meta(name='viewport', content='width=device-width')
     title= title
     block css
-      link(rel='stylesheet', href='/styles/main.css')
-    block js
-      script(src='http://localhost:35729/livereload.js')
+      // build:css styles/main.css
+      link(rel='stylesheet', href='styles/normalize.css')
+      link(rel='stylesheet', href='styles/style.css')
+      // endbuild
+    //block js
+    //  script(src='http://localhost:35729/livereload.js')
   body
     block content
+    
+    block js
+      // build:js(.tmp) scripts/templates.js
+      script(src='scripts/compiled-templates.js')
+      // endbuild
+
+      // build:js(.tmp) scripts/main.js
+      script(src='scripts/combined-scripts.js')
+      // endbuild
