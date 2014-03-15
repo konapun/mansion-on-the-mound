@@ -1,24 +1,76 @@
 doctype 5
-html(lang='en')
+html(lang="en")
   head
-    meta(charset='UTF-8')
-    meta(name='viewport', content='width=device-width')
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width")
     title= title
     block css
       // build:css styles/main.css
-      link(rel='stylesheet', href='styles/normalize.css')
-      link(rel='stylesheet', href='styles/style.css')
+      link(rel="stylesheet", href="stylesheets/normalize.css")
+      link(rel="stylesheet", href="stylesheets/style.css")
       // endbuild
     //block js
-    //  script(src='http://localhost:35729/livereload.js')
+      script(src="http://localhost:35729/livereload.js")
   body
-    block content
+    nav(class="navbar navbar-default", role="navigation")
+      div(class="container-fluid")
+        // Brand and toggle get grouped for better mobile display
+        div(class="navbar-header")
+          button(type="button", class="navbar-toggle", data-toggle="collapse")
+            span(class="sr-only") Toggle navigation
+            span(class="icon-bar")
+            span(class="icon-bar")
+            span(class="icon-bar")
+          a(class="navbar-brand", href="#") #{title}
+        
+        // Collect the nav links, forms, and other content for toggling
+        div(class="collapse navbar-collapse")
+          ul(class="nav navbar-nav")
+            li(class="active")
+              a(href="#") Link
+            li
+              a(href="#") Link
+            li(class="dropdown")
+              a(href="#", class="dropdown-toggle", data-toggle="dropdown") Dropdown
+                b(class="caret")
+              ul(class="dropdown-menu")
+                li
+                  a(href="#") Action
+                li
+                  a(href="#") Another action
+                li
+                  a(href="#") Something else here
+                li(class="divider")
+                li
+                  a(href="#") Separated link
+                li(class="divider")
+                li
+                  a(href="#") One more separated link
+          form(class="navbar-form navbar-left", role="search")
+            div(class="form-group")
+              input(type="text", class="form-control", placeholder="Search")
+            button(type="submit", class="btn btn-default") Submit
+          ul(class="nav navbar-nav navbar-right")
+            li
+              a(href="#") Link
+            li(class="dropdown")
+              a(href="#", class="dropdown-toggle", data-toggle="dropdown") Dropdown
+                b(class="caret")
+              ul(class="dropdown-menu")
+                li
+                  a(href="#") Action
+                li
+                  a(href="#") Another action
+                li
+                  a(href="#") Something else here
+                li(class="divider")
+                li
+                  a(href="#") Separated link
+    
+    div(class="container")
+      block content
     
     block js
-      // build:js(.tmp) scripts/templates.js
-      script(src='scripts/compiled-templates.js')
-      // endbuild
-
       // build:js(.tmp) scripts/main.js
-      script(src='scripts/combined-scripts.js')
+      script(src="scripts/combined-scripts.js")
       // endbuild

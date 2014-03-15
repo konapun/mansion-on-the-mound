@@ -1,5 +1,8 @@
-var express = require('express');
+var express = require('express'),
+    compass = require('node-compass'),
+    browserify = require('browserify-middleware');
 
+// Middleware
 module.exports = function(app, config) {
   app.configure(function () {
     app.use(express.compress());
@@ -12,6 +15,8 @@ module.exports = function(app, config) {
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(app.router);
+    app.use(compass()); // compile SASS/SCSS into /stylesheets/style.css
+    // browserify TODO: https://github.com/ForbesLindesay/browserify-middleware/tree/master/example
     app.use(function(req, res) {
       res.status(404).render('404', { title: '404' });
     });
