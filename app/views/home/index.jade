@@ -1,4 +1,14 @@
 extends ../layout
 
 block content
-  h1.creepy Things that go bump in the night...
+  h1(class="creepy text-center") Things that go bump in the night...
+  
+  div(id="game", class="viewport")
+  
+  // Game imports
+  block js
+    script(src="bower_components/crafty/crafty.js")
+    script(src="js/game/game.js")
+    script(src="js/game/components.js")
+    script(src="js/game/scenes.js")
+    script(src="js/main.js")
