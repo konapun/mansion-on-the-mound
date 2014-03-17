@@ -2,7 +2,7 @@
 /*
  * Main game loop
  */
-Crafty.scene('Game', function() {
+Crafty.defineScene('Game', function() {
 	var testPlayer = Crafty.e('Player'),
 	    players = [testPlayer];
 	    
@@ -40,14 +40,14 @@ Crafty.scene('Game', function() {
 /*
  * Scene triggered when a player moves to a different tile
  */
-Crafty.scene('SwitchRoom', function() {
+Crafty.defineScene('SwitchRoom', function() {
 	
 });
 
 /*
  * Scene to play before game starts
  */
-Crafty.scene('Intro', function() {
+Crafty.defineScene('Intro', function() {
 	Crafty.e('2D, DOM, Text')
 		.text('A Mystery at the Mansion on the Mound')
 		.attr({
@@ -60,14 +60,14 @@ Crafty.scene('Intro', function() {
 /*
  * Scene to play when player has won
  */
-Crafty.scene('Win', function() {
+Crafty.defineScene('Win', function() {
 
 });
 
 /*
  * Scene to play when player has lost
  */
-Crafty.scene('Lose', function() {
+Crafty.defineScene('Lose', function() {
 
 });
 
@@ -75,7 +75,7 @@ Crafty.scene('Lose', function() {
  *
  * Handles the loading of binary assets such as images and audio files
  */
-Crafty.scene('Loading', function() {
+Crafty.defineScene('Loading', function() {
 	Crafty.e('2D, DOM, Text')
 		.text('Loading; please wait...')
 		.attr({ x: 0, y: Game.height()/2 - 24, w: Game.width() })
@@ -93,10 +93,10 @@ Crafty.scene('Loading', function() {
 	 
 		// Define audio with fallback formats
 		Crafty.audio.add({
-			theme:    ['sound/music/main-theme.mp3', 'sound/music/main-theme.ogg']
+			theme: ['sound/music/main-theme.mp3', 'sound/music/main-theme.ogg']
 		});
 	 
 		// Loading complete; start game scene
-		Crafty.scene('Game');
+		Crafty.enterScene('Game');
 	});
 });
