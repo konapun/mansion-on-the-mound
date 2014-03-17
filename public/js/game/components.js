@@ -21,11 +21,13 @@ Crafty.c('Player', {
 		this.requires('Actor, Fourway, Collision, spr_player, SpriteAnimation')
 		    .fourway(2)
 		
+		var player = this;
 		var stopMovement = function() {
-			this._speed = 0;
-			if (this._movement) {
-				this.x -= this._movement.x;
-				this.y -= this._movement.y;
+			player._speed = 0;
+			player.pauseAnimation();
+			if (player._movement) {
+				player.x -= player._movement.x;
+				player.y -= player._movement.y;				
 			}
 		};
 		this.onHit('Solid', stopMovement);
@@ -49,50 +51,30 @@ Crafty.c('Player', {
 		});
 		
 		this.z = 1; // Tile has a z-index of 0, so draw one layer above
-		this.animate('PlayerMovingUp',    0, 0, 2)
-		    .animate('PlayerMovingRight', 0, 1, 2)
-		    .animate('PlayerMovingDown',  0, 2, 2)
-		    .animate('PlayerMovingLeft',  0, 3, 2);
 		
-		this.attr({
-			// Different health measures
-			sanity: {
-				values: [],
-				index: 0
-			},
-			strength: {
-				values: [],
-				index: 0
-			},
-			speed: {
-				values: [],
-				index: 0
-			},
-			knowledge: { 
-				values: [],
-				index: 0
-			},
-			
-			roomsLeft: 0 // the number of rooms the player can traverse. Decrements each time a new room is entered
-		});
+		var animation_speed = 200;
+		this.reel('PlayerMovingUp',    animation_speed, [[0, 0], [1, 0], [2, 0]])
+		    .reel('PlayerMovingRight', animation_speed, [[0, 1], [1, 1], [2, 1]])
+		    .reel('PlayerMovingDown',  animation_speed, [[0, 2], [1, 2], [2, 2]])
+		    .reel('PlayerMovingLeft',  animation_speed, [[0, 3], [1, 3], [2, 3]]);
 		
-        // Watch for a change of direction and switch animations accordingly
-		var animation_speed = 4;
+		
+    // Watch for a change of direction and switch animations accordingly
 		this.bind('NewDirection', function(data) {
 			if (data.x > 0) {
-				this.animate('PlayerMovingRight', animation_speed, -1);
+				this.animate('PlayerMovingRight', -1);
 			}
 			else if (data.x < 0) {
-				this.animate('PlayerMovingLeft', animation_speed, -1);
+				this.animate('PlayerMovingLeft', -1);
 			}
 			else if (data.y > 0) {
-				this.animate('PlayerMovingDown', animation_speed, -1);
+				this.animate('PlayerMovingDown', -1);
 			}
 			else if (data.y < 0) {
-				this.animate('PlayerMovingUp', animation_speed, -1);
+				this.animate('PlayerMovingUp', -1);
 			}
 			else {
-				this.stop();
+				stopMovement();
 			}
 		});
 	},
