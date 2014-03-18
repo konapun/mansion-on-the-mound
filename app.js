@@ -1,7 +1,8 @@
 var express = require('express'),
   mongoose = require('mongoose'),
   fs = require('fs'),
-  config = require('./config/config');
+  config = require('./config/config'),
+  sockets = require('./config/sockets');
 
 /*
 mongoose.connect(config.db);
@@ -23,4 +24,4 @@ require('./config/express')(app, config);
 require('./config/routes')(app);
 
 console.log("Listening on port " + config.port);
-app.listen(config.port);
+sockets.listen(app.listen(config.port));
