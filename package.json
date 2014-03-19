@@ -14,8 +14,7 @@
     "socket.io": "^0.9.16",
     "node-compass": "^0.2.3",
     "browserify-middleware": "^2.3.0",
-    "extend": "^1.2.1",
-    "util": "^0.10.3"
+    "extend": "^1.2.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
