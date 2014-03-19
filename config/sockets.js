@@ -1,21 +1,18 @@
 /*
  * Connect front end and back end through socket events
  */
-var io = requrie('socket.io');
+var io = require('socket.io'),
+    commands = require('../lib/commands');
+
 module.exports = {
   listen: function(port) {
-    configureSockets(io);
-    io.listen(port);
+    var server = io.listen(port);
+    
+    server.sockets.on('connection', function(socket) { // register all commands with socket events
+      socket.emit('connect');
+      commands.forEach(function(command) {
+        command.register(socket);
+      });
+    });
   }
 };
-
-/*
- * Set up all socket events
- */
-function configureSockets(io) {
-  io.sockets.on('connection', function(socket) {
-    socket.emit('connect'); // broadcast connect event to all listeners
-    
-    // TODO
-  });
-}
