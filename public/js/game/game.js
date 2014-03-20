@@ -69,7 +69,7 @@ var Directions = {
 	}
 };
 
-var Game = {
+MansionApp.Game = {
 	players: [],
 	turn: 0,
 	map_grid: {
