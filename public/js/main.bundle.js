@@ -729,7 +729,7 @@ MansionApp.Game = {
 	start: function(players) {
 		this.players = players;
 		
-		Crafty.init(Game.width(), Game.height(), document.getElementById('game'));
+		Crafty.init(this.width(), this.height(), document.getElementById('game'));
 		Crafty.scene('Loading');
 	}
 };

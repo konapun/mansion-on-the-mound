@@ -30,10 +30,21 @@ module.exports = function (grunt) {
         ],
         tasks: ['develop', 'delayed-livereload']
       },
+      web: {
+      	files: ['public/js/**/*.js'],
+      	tasks: ['browserify']
+      },
       jade: {
         files: ['app/views/**/*.jade'],
         options: { livereload: reloadPort }
       }
+    },
+    browserify: {
+    	dist: {
+    		files: {
+    			'public/js/main.bundle.js': ['public/js/main.js']
+    		}
+    	}
     }
   });
  
@@ -54,6 +65,8 @@ module.exports = function (grunt) {
         });
     }, 500);
   });
- 
-  grunt.registerTask('default', ['develop', 'watch']);
+ 	
+ 	grunt.loadNpmTasks('grunt-contrib-watch');
+ 	grunt.loadNpmTasks('grunt-browserify');
+  grunt.registerTask('default', ['browserify', 'develop', 'watch']);
 };
