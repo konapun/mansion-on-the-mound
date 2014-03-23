@@ -5,18 +5,17 @@ require('./game/game');
 require('./game/components');
 require('./game/tiles');
 require('./game/scenes');
+require('./game/events');
 
 var socket = io.connect('http://localhost'),
-    events = require('./game/events');    
+    events = MansionApp.events;
 for (var eventName in events) { // register client events
-  var event = events[eventName];
   socket.on(eventName, function(data) {
+    var event = events[eventName];
     event(data, socket);
   });
 }
 
 
-var players = [
-
-];
+var players = [];
 window.addEventListener('load', MansionApp.Game.start(players));

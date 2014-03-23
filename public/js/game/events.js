@@ -2,11 +2,15 @@
  * Respond to socket messages from server
  */
 MansionApp.events = {
+
+  /*
+   *
+   */
   'connect': function(data, socket) {
-    alert("Got connect");
+    var playerName = data.playerName;
+    console.log("Got connect");
   },
   'disconnect': function(data, socket) {
-    alert("Got disconnect");
+    console.log("Got disconnect");
   }
 };
-

@@ -6,66 +6,30 @@ html(lang="en")
     title= title
     block css
       // build:css styles/main.css
-      link(rel="stylesheet", href="stylesheets/normalize.css")
-      link(rel="stylesheet", href="stylesheets/style.css")
+      link(rel="stylesheet", href="/stylesheets/normalize.css")
+      link(rel="stylesheet", href="/stylesheets/style.css")
       // endbuild
     //block js
       script(src="http://localhost:35729/livereload.js")
   body
-    nav(class="navbar navbar-default", role="navigation")
-      div(class="container-fluid")
-        // Brand and toggle get grouped for better mobile display
+    nav(class="navbar navbar-inverse", role="navigation")
+      div(class="container")
         div(class="navbar-header")
-          button(type="button", class="navbar-toggle", data-toggle="collapse")
+          button(type="button", class="navbar-toggle", data-toggle="collapse", data-target=".navbar-ex1-collapse")
             span(class="sr-only") Toggle navigation
             span(class="icon-bar")
             span(class="icon-bar")
-            span(class="icon-bar")
-          a(class="navbar-brand", href="#") #{title}
-        
-        // Collect the nav links, forms, and other content for toggling
-        div(class="collapse navbar-collapse")
+            span(class="icon-bar")        
+          a(class="navbar-brand", href="index.php") A Mystery at the Mansion on the Mound
+
+        div(class="collapse navbar-collapse navbar-ex1-collapse pull-right")
           ul(class="nav navbar-nav")
-            li(class="active")
-              a(href="#") Link
             li
-              a(href="#") Link
-            //li(class="dropdown")
-            //  a(href="#", class="dropdown-toggle", data-toggle="dropdown") Dropdown
-            //    b(class="caret")
-            //  ul(class="dropdown-menu")
-            //    li
-            //      a(href="#") Action
-            //    li
-            //      a(href="#") Another action
-            //    li
-            //      a(href="#") Something else here
-            //    li(class="divider")
-            //    li
-            //      a(href="#") Separated link
-            //    li(class="divider")
-            //    li
-            //      a(href="#") One more separated link
-          //form(class="navbar-form navbar-left", role="search")
-          //  div(class="form-group")
-          //    input(type="text", class="form-control", placeholder="Search")
-          //  button(type="submit", class="btn btn-default") Submit
-          ul(class="nav navbar-nav navbar-right")
+              a(href="#about") About
             li
-              a(href="#") Link
-            li(class="dropdown")
-              a(href="#", class="dropdown-toggle", data-toggle="dropdown") Dropdown
-                b(class="caret")
-              ul(class="dropdown-menu")
-                li
-                  a(href="#") Action
-                li
-                  a(href="#") Another action
-                li
-                  a(href="#") Something else here
-                li(class="divider")
-                li
-                  a(href="#") Separated link
+              a(href="#services") Services
+            li
+              a(href="#contact") Contact
     
     div(class="container")
       block content

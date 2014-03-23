@@ -612,14 +612,18 @@ Crafty.c('CardsHUD', {
  * Respond to socket messages from server
  */
 MansionApp.events = {
+
+  /*
+   *
+   */
   'connect': function(data, socket) {
-    alert("Got connect");
+    var playerName = data.playerName;
+    console.log("Got connect");
   },
   'disconnect': function(data, socket) {
-    alert("Got disconnect");
+    console.log("Got disconnect");
   }
 };
-
 
 },{}],3:[function(require,module,exports){
 /*
@@ -960,20 +964,19 @@ require('./game/game');
 require('./game/components');
 require('./game/tiles');
 require('./game/scenes');
+require('./game/events');
 
 var socket = io.connect('http://localhost'),
-    events = require('./game/events');    
+    events = MansionApp.events;
 for (var eventName in events) { // register client events
-  var event = events[eventName];
   socket.on(eventName, function(data) {
+    var event = events[eventName];
     event(data, socket);
   });
 }
 
 
-var players = [
-
-];
+var players = [];
 window.addEventListener('load', MansionApp.Game.start(players));
 
 },{"./game/components":1,"./game/events":2,"./game/game":3,"./game/scenes":4,"./game/tiles":5}]},{},[6])
