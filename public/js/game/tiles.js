@@ -1,6 +1,16 @@
 /*
+ * Available floors in the mansion
+ */
+MansionApp.Floors = {
+	UPPER: 'upper',
+	GROUND: 'ground',
+	BASEMENT: 'basement'
+};
+
+/*
  * A blank (invisible) tile used as a spacer
  */
+var Directions = MansionApp.Directions, Floors = MansionApp.Floors;
 Crafty.c('BlankTile', {
 	init: function() {
 		this.requires('Tile');

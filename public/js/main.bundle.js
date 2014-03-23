@@ -5,6 +5,8 @@
  * Author: Bremen Braun
  */
 
+var Directions = MansionApp.Directions;
+
 /*
  * An entity that is drawn in 2D on a canvas
  */
@@ -621,18 +623,9 @@ MansionApp.events = {
 
 },{}],3:[function(require,module,exports){
 /*
- * Available floors in the mansion
- */
-var Floors = {
-	UPPER: 'upper',
-	GROUND: 'ground',
-	BASEMENT: 'basement'
-};
-
-/*
  * Directions and operations on directions for player movement, tile connection
  */
-var Directions = {
+MansionApp.Directions = {
 	/*
 	 * Enum for directions
 	 */
@@ -740,6 +733,8 @@ $text_css = { 'font-size': '24px', 'font-family': 'Arial', 'color': 'white', 'te
 
 },{}],4:[function(require,module,exports){
 
+var Directions = MansionApp.Directions;
+
 /*
  * Main game loop
  */
@@ -793,7 +788,7 @@ Crafty.defineScene('Intro', function() {
 		.text('A Mystery at the Mansion on the Mound')
 		.attr({
 			x: 0,
-			y: Game.height() / 2 - 24,
+			y: MansionApp.Game.height() / 2 - 24,
 			w: Game.width()
 		});
 });
@@ -819,7 +814,7 @@ Crafty.defineScene('Lose', function() {
 Crafty.defineScene('Loading', function() {
 	Crafty.e('2D, DOM, Text')
 		.text('Loading; please wait...')
-		.attr({ x: 0, y: Game.height()/2 - 24, w: Game.width() })
+		.attr({ x: 0, y: MansionApp.Game.height()/2 - 24, w: MansionApp.Game.width() })
 		.css($text_css);
  
     // Load spritemaps
@@ -844,8 +839,18 @@ Crafty.defineScene('Loading', function() {
 
 },{}],5:[function(require,module,exports){
 /*
+ * Available floors in the mansion
+ */
+MansionApp.Floors = {
+	UPPER: 'upper',
+	GROUND: 'ground',
+	BASEMENT: 'basement'
+};
+
+/*
  * A blank (invisible) tile used as a spacer
  */
+var Directions = MansionApp.Directions, Floors = MansionApp.Floors;
 Crafty.c('BlankTile', {
 	init: function() {
 		this.requires('Tile');
@@ -951,12 +956,13 @@ Crafty.c('ConservatoryTile', {
 MansionApp = window.MansionApp = {};
 
 // Require game scripts using browserify (via grunt task)
+require('./game/game');
+require('./game/components');
+require('./game/tiles');
+require('./game/scenes');
+
 var socket = io.connect('http://localhost'),
-    events = require('./game/events'),
-    game = require('./game/game'),
-    components = require('./game/components.js'), // TODO: require elsewhere
-    tiles = require('./game/tiles.js'),
-    scenes = require('./game/scenes.js');
+    events = require('./game/events');    
 for (var eventName in events) { // register client events
   var event = events[eventName];
   socket.on(eventName, function(data) {
@@ -970,4 +976,4 @@ var players = [
 ];
 window.addEventListener('load', MansionApp.Game.start(players));
 
-},{"./game/components.js":1,"./game/events":2,"./game/game":3,"./game/scenes.js":4,"./game/tiles.js":5}]},{},[6])
+},{"./game/components":1,"./game/events":2,"./game/game":3,"./game/scenes":4,"./game/tiles":5}]},{},[6])

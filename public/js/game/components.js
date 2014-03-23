@@ -4,6 +4,8 @@
  * Author: Bremen Braun
  */
 
+var Directions = MansionApp.Directions;
+
 /*
  * An entity that is drawn in 2D on a canvas
  */

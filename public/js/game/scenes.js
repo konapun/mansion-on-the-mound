@@ -1,4 +1,6 @@
 
+var Directions = MansionApp.Directions;
+
 /*
  * Main game loop
  */
@@ -52,7 +54,7 @@ Crafty.defineScene('Intro', function() {
 		.text('A Mystery at the Mansion on the Mound')
 		.attr({
 			x: 0,
-			y: Game.height() / 2 - 24,
+			y: MansionApp.Game.height() / 2 - 24,
 			w: Game.width()
 		});
 });
@@ -78,7 +80,7 @@ Crafty.defineScene('Lose', function() {
 Crafty.defineScene('Loading', function() {
 	Crafty.e('2D, DOM, Text')
 		.text('Loading; please wait...')
-		.attr({ x: 0, y: Game.height()/2 - 24, w: Game.width() })
+		.attr({ x: 0, y: MansionApp.Game.height()/2 - 24, w: MansionApp.Game.width() })
 		.css($text_css);
  
     // Load spritemaps

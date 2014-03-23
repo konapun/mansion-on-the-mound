@@ -1,16 +1,7 @@
 /*
- * Available floors in the mansion
- */
-var Floors = {
-	UPPER: 'upper',
-	GROUND: 'ground',
-	BASEMENT: 'basement'
-};
-
-/*
  * Directions and operations on directions for player movement, tile connection
  */
-var Directions = {
+MansionApp.Directions = {
 	/*
 	 * Enum for directions
 	 */
