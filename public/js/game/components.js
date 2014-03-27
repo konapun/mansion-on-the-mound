@@ -4,7 +4,8 @@
  * Author: Bremen Braun
  */
 
-var Directions = MansionApp.Directions;
+var Directions = MansionApp.Directions,
+    events = MansionApp.events;
 
 /*
  * An entity that is drawn in 2D on a canvas
@@ -62,17 +63,22 @@ Crafty.c('Player', {
 		
 		
     // Watch for a change of direction and switch animations accordingly
+    // TODO: For now, just trigger an event when a new direction is triggered (eventually we'll want to trigger more often)
 		this.bind('NewDirection', function(data) {
 			if (data.x > 0) {
+			  events.trigger('move', Directions.RIGHT, 1);
 				this.animate('PlayerMovingRight', -1);
 			}
 			else if (data.x < 0) {
+			  events.trigger('move', Directions.LEFT, 1);
 				this.animate('PlayerMovingLeft', -1);
 			}
 			else if (data.y > 0) {
+			  events.trigger('move', Directions.DOWN, 1);
 				this.animate('PlayerMovingDown', -1);
 			}
 			else if (data.y < 0) {
+			  events.trigger('move', Directions.UP, 1);
 				this.animate('PlayerMovingUp', -1);
 			}
 			else {

@@ -1,11 +1,11 @@
 MansionApp = window.MansionApp = {};
 
 // Require game scripts using browserify (via grunt task)
+require('./game/events');
 require('./game/game');
 require('./game/components');
 require('./game/tiles');
 require('./game/scenes');
-require('./game/events');
 
 var socket = io.connect('http://localhost'),
     events = MansionApp.events;
