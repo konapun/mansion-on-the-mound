@@ -633,6 +633,7 @@ var events = MansionApp.events = (function() {
   };
 })();
 
+// Register some default events
 events.register('move', function(direction, units) {
   console.log("MOVING: " + units + " units " + direction);
 });

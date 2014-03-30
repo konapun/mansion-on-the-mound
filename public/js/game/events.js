@@ -6,10 +6,16 @@ var events = MansionApp.events = (function() {
   var events = {};
   return {
     
+    /*
+     * Register an event which can be triggered
+     */
     register: function(name, cb) {
       events[name] = cb;
     },
     
+    /*
+     * Trigger a callback by its registration name
+     */
     trigger: function(eventName) {
       var event = events[eventName];
       event.apply(this, Array.prototype.slice.call(arguments, 1));
@@ -18,8 +24,14 @@ var events = MansionApp.events = (function() {
 })();
 
 // Register some default events
+var socket = MansionApp.globals.socket;
 events.register('move', function(direction, units) {
   console.log("MOVING: " + units + " units " + direction);
+  socket.emit('call-action', {
+    player: -1,
+    direction: direction,
+    units: units
+  });
 });
 
 // FIXME - these are responses
