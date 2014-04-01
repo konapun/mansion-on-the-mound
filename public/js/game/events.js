@@ -28,6 +28,7 @@ var socket = MansionApp.globals.socket;
 events.register('move', function(direction, units) {
   console.log("MOVING: " + units + " units " + direction);
   socket.emit('call-action', {
+    action: 'move',
     player: -1,
     direction: direction,
     units: units

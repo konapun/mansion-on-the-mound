@@ -622,10 +622,16 @@ var events = MansionApp.events = (function() {
   var events = {};
   return {
     
+    /*
+     * Register an event which can be triggered
+     */
     register: function(name, cb) {
       events[name] = cb;
     },
     
+    /*
+     * Trigger a callback by its registration name
+     */
     trigger: function(eventName) {
       var event = events[eventName];
       event.apply(this, Array.prototype.slice.call(arguments, 1));
@@ -634,8 +640,15 @@ var events = MansionApp.events = (function() {
 })();
 
 // Register some default events
+var socket = MansionApp.globals.socket;
 events.register('move', function(direction, units) {
   console.log("MOVING: " + units + " units " + direction);
+  socket.emit('call-action', {
+    action: 'move',
+    player: -1,
+    direction: direction,
+    units: units
+  });
 });
 
 // FIXME - these are responses
@@ -768,6 +781,14 @@ $text_css = { 'font-size': '24px', 'font-family': 'Arial', 'color': 'white', 'te
 
 
 },{}],4:[function(require,module,exports){
+/*
+ * This is a good candidate for cleanup
+ */
+MansionApp.globals = {
+  socket: io.connect('http://localhost')
+}
+
+},{}],5:[function(require,module,exports){
 
 var Directions = MansionApp.Directions;
 
@@ -873,7 +894,7 @@ Crafty.defineScene('Loading', function() {
 	});
 });
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /*
  * Available floors in the mansion
  */
@@ -988,17 +1009,18 @@ Crafty.c('ConservatoryTile', {
 	}
 });
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 MansionApp = window.MansionApp = {};
 
 // Require game scripts using browserify (via grunt task)
+require('./game/globals');
 require('./game/events');
 require('./game/game');
 require('./game/components');
 require('./game/tiles');
 require('./game/scenes');
 
-var socket = io.connect('http://localhost'),
+var socket = MansionApp.globals.socket,
     events = MansionApp.events;
 for (var eventName in events) { // register client events
   socket.on(eventName, function(data) {
@@ -1011,4 +1033,4 @@ for (var eventName in events) { // register client events
 var players = [];
 window.addEventListener('load', MansionApp.Game.start(players));
 
-},{"./game/components":1,"./game/events":2,"./game/game":3,"./game/scenes":4,"./game/tiles":5}]},{},[6])
+},{"./game/components":1,"./game/events":2,"./game/game":3,"./game/globals":4,"./game/scenes":5,"./game/tiles":6}]},{},[7])
